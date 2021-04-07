@@ -3,8 +3,8 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package fr.insalyon.dasi.predictif.metier.modele;
-import fr.insalyon.dasi.predictif.util.AstroNetApi;
+package fr.insalyon.dasi.PredictIF.predictif.metier.modele;
+import fr.insalyon.dasi.PredictIF.predictif.util.AstroNetApi;
 import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;

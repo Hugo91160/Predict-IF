@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package fr.insalyon.dasi.predictif.util;
+package fr.insalyon.dasi.PredictIF.predictif.util;
 
 import java.io.PrintStream;
 import java.io.PrintWriter;

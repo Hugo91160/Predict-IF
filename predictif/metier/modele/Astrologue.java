@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package fr.insalyon.dasi.predictif.metier.modele;
+package fr.insalyon.dasi.PredictIF.predictif.metier.modele;
 
 import javax.persistence.*;
 
@@ -16,6 +16,9 @@ import javax.persistence.*;
 public class Astrologue extends Medium{
     private String formation;
     private String promotion;
+
+    public Astrologue() {
+    }
     
     public Astrologue(String denomination, String genre, String presentation, String formation, String promotion) {
         super(denomination, genre, presentation);

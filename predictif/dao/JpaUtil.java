@@ -1,4 +1,4 @@
-package fr.insalyon.dasi.predictif.dao;
+package fr.insalyon.dasi.PredictIF.predictif.dao;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;

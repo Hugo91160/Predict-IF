@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package fr.insalyon.dasi.predictif.metier.modele;
+package fr.insalyon.dasi.PredictIF.predictif.metier.modele;
 
 import javax.persistence.*;
 
@@ -15,7 +15,10 @@ import javax.persistence.*;
 @Table(name="Spirite")
 public class Spirite extends Medium{
     private String support;
-    
+
+    public Spirite() {
+    }
+
     public Spirite(String denomination, String genre, String presentation, String support) {
         super(denomination, genre, presentation);
         this.support = support;

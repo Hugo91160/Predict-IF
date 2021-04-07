@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package fr.insalyon.dasi.predictif.metier.modele;
+package fr.insalyon.dasi.PredictIF.predictif.metier.modele;
 import javax.persistence.*;
 
 /**
@@ -13,6 +13,9 @@ import javax.persistence.*;
 @Entity
 @Table(name="Cartomancien")
 public class Cartomancien extends Medium {
+
+    public Cartomancien() {
+    }
     
     public Cartomancien(String denomination, String genre, String presentation) {
         super(denomination, genre, presentation);

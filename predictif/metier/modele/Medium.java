@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package fr.insalyon.dasi.predictif.metier.modele;
+package fr.insalyon.dasi.PredictIF.predictif.metier.modele;
 
 import javax.persistence.*;
 
@@ -20,6 +20,9 @@ public abstract class Medium {
     private String denomination;
     private String genre;
     private String presentation;
+
+    public Medium() {
+    }
 
     public Medium(String denomination, String genre, String presentation) {
         this.denomination = denomination;

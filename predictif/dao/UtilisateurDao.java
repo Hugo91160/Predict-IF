@@ -3,9 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package fr.insalyon.dasi.predictif.dao;
+package fr.insalyon.dasi.PredictIF.predictif.dao;
 
-import fr.insalyon.dasi.predictif.metier.modele.Utilisateur;
+import fr.insalyon.dasi.PredictIF.predictif.metier.modele.Utilisateur;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;

@@ -3,20 +3,20 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package fr.insalyon.dasi.predictif.metier.service;
+package fr.insalyon.dasi.PredictIF.predictif.metier.service;
 
-import fr.insalyon.dasi.predictif.metier.modele.*;
-import fr.insalyon.dasi.predictif.dao.ClientDao;
-import fr.insalyon.dasi.predictif.dao.ConsultationDao;
-import fr.insalyon.dasi.predictif.dao.JpaUtil;
-import fr.insalyon.dasi.predictif.dao.UtilisateurDao;
-import fr.insalyon.dasi.predictif.metier.modele.Consultation;
-import fr.insalyon.dasi.predictif.metier.modele.Employe;
-import fr.insalyon.dasi.predictif.metier.modele.Medium;
-import fr.insalyon.dasi.predictif.metier.modele.ProfilAstral;
-import fr.insalyon.dasi.predictif.metier.modele.Utilisateur;
-import fr.insalyon.dasi.predictif.util.AstroNetApi;
-import fr.insalyon.dasi.predictif.util.Message;
+import fr.insalyon.dasi.PredictIF.predictif.metier.modele.*;
+import fr.insalyon.dasi.PredictIF.predictif.dao.ConsultationDao;
+import fr.insalyon.dasi.PredictIF.predictif.dao.JpaUtil;
+import fr.insalyon.dasi.PredictIF.predictif.dao.MediumDao;
+import fr.insalyon.dasi.PredictIF.predictif.dao.UtilisateurDao;
+import fr.insalyon.dasi.PredictIF.predictif.metier.modele.Consultation;
+import fr.insalyon.dasi.PredictIF.predictif.metier.modele.Employe;
+import fr.insalyon.dasi.PredictIF.predictif.metier.modele.Medium;
+import fr.insalyon.dasi.PredictIF.predictif.metier.modele.ProfilAstral;
+import fr.insalyon.dasi.PredictIF.predictif.metier.modele.Utilisateur;
+import fr.insalyon.dasi.PredictIF.predictif.util.AstroNetApi;
+import fr.insalyon.dasi.PredictIF.predictif.util.Message;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.StringWriter;
@@ -62,15 +62,15 @@ public class Service {
         {
             //ex.printStackTrace();
             JpaUtil.annulerTransaction();
-            client = null; //dans le cas où le client a déjà un mail dans la base
+             //dans le cas où le client a déjà un mail dans la base
             
             //envoyer le message erreur
             StringWriter corps = new StringWriter();
             PrintWriter mailWriter = new PrintWriter(corps);
             mailWriter.println("Bonjour "+client.getPrenom()+", votre inscription au service PREDICT’IF a malencontreusement échoué..");
             mailWriter.println("Merci de recommencer ultérieurement.");
-
             Message.envoyerMail("contact@predict.if", client.getAdresseElectronique(), "Bienvenue chez PREDICT'IF", corps.toString());
+            client = null;
         }
         finally
         {
@@ -125,10 +125,7 @@ public class Service {
             JpaUtil.fermerContextePersistance();
         }
         
-        if(med instanceof Spirite)
-        {
-            Spirite spirite = (Spirite) med 
-        }
+
         return med;
         
     }

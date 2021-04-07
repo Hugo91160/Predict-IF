@@ -3,14 +3,14 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package fr.insalyon.dasi.predictif.console;
+package fr.insalyon.dasi.PredictIF.predictif.console;
 
-import fr.insalyon.dasi.predictif.metier.modele.Cartomancien;
-import fr.insalyon.dasi.predictif.metier.modele.Client;
-import fr.insalyon.dasi.predictif.metier.modele.Employe;
-import fr.insalyon.dasi.predictif.metier.service.Service;
-import fr.insalyon.dasi.predictif.dao.JpaUtil;
-import fr.insalyon.dasi.predictif.metier.modele.Utilisateur;
+import fr.insalyon.dasi.PredictIF.predictif.metier.modele.Cartomancien;
+import fr.insalyon.dasi.PredictIF.predictif.metier.modele.Client;
+import fr.insalyon.dasi.PredictIF.predictif.metier.modele.Employe;
+import fr.insalyon.dasi.PredictIF.predictif.metier.service.Service;
+import fr.insalyon.dasi.PredictIF.predictif.dao.JpaUtil;
+import fr.insalyon.dasi.PredictIF.predictif.metier.modele.Utilisateur;
 import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -24,6 +24,8 @@ public class main {
 
     /**
      * @param args the command line arguments
+     * @throws java.text.ParseException
+     * @throws java.io.IOException
      */
     public static void main(String[] args) throws ParseException, IOException {
         JpaUtil.init();

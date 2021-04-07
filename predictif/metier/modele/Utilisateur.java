@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package fr.insalyon.dasi.predictif.metier.modele;
+package fr.insalyon.dasi.PredictIF.predictif.metier.modele;
 
 import javax.persistence.*;
 
