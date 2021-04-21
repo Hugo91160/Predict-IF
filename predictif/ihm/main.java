@@ -1,4 +1,4 @@
-package fr.insalyon.dasi.PredictIF.predictif;
+package fr.insalyon.dasi.PredictIF.predictif.ihm;
 
 
 import fr.insalyon.dasi.PredictIF.predictif.dao.JpaUtil;
