@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package fr.insalyon.dasi.PredictIF.predictif.metier.service;
+package fr.insalyon.dasi.PredictIF.predictif.metier;
 
 import fr.insalyon.dasi.PredictIF.predictif.metier.modele.*;
 import fr.insalyon.dasi.PredictIF.predictif.dao.ConsultationDao;
@@ -20,6 +20,7 @@ import fr.insalyon.dasi.PredictIF.predictif.util.Message;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.StringWriter;
+import java.util.Calendar;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;

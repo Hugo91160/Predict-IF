@@ -9,7 +9,8 @@ import fr.insalyon.dasi.PredictIF.predictif.metier.modele.Consultation;
 import fr.insalyon.dasi.PredictIF.predictif.metier.modele.Employe;
 import fr.insalyon.dasi.PredictIF.predictif.metier.modele.Medium;
 
-import static dao.JpaUtil.obtenirContextePersistance;
+import  fr.insalyon.dasi.PredictIF.predictif.dao.JpaUtil.*;
+import static fr.insalyon.dasi.PredictIF.predictif.dao.JpaUtil.obtenirContextePersistance;
 import java.util.List;
 import javax.persistence.Query;
 

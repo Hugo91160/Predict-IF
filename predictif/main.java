@@ -1,19 +1,17 @@
-package vue;
+package fr.insalyon.dasi.PredictIF.predictif;
 
 
-import dao.JpaUtil;
+import fr.insalyon.dasi.PredictIF.predictif.dao.JpaUtil;
+import fr.insalyon.dasi.PredictIF.predictif.metier.Service;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import metier.modele.Client;
-import metier.modele.Medium;
-import metier.modele.Utilisateur;
-import metier.service.Service;
+import fr.insalyon.dasi.PredictIF.predictif.metier.modele.*;
+import java.io.IOException;
 
+class Main {
 
-public class Main {
-
-    public static void main(String[] args) throws ParseException {
+    public static void main(String[] args) throws ParseException, IOException {
         
         JpaUtil.init();
         
@@ -29,7 +27,7 @@ public class Main {
     public static SimpleDateFormat DateFormat = new SimpleDateFormat("dd/MM/yyyy");
     Date d;
     
-     public static void initialiserUtilisateur() throws ParseException{
+     public static void initialiserUtilisateur() throws ParseException, IOException{
         Client client;
         Date d = DateFormat.parse("19/12/2000");
         client = new Client("alami", "meryem", "meryem.alami00@gmail.com", "meryemalami", "0651815318", d, "Einstein");
@@ -38,7 +36,7 @@ public class Main {
             
     }
     
-    public static void  testInscriptionClient() throws ParseException{
+    public static void  testInscriptionClient() throws ParseException, IOException{
         //Inscription Client
         Date d = DateFormat.parse("19/12/2000");
         Client client = new Client("alami", "meryem", "meryem.alami@gmail.com", "meryemalami", "0651815318", d, "Einstein");
@@ -50,7 +48,7 @@ public class Main {
             
         }else {
             System.out.println("Succès inscription\n");
-            System.out.println(" nom="+client.getNom()+"; prénom="+client.getPrenom()+"; mail="+client.getMail()+"; motDePasse="+client.getMotDePasse()+ "; numeroTel="+client.getNumeroTel()+"; dateNaissance="+client.getDateNaissance()+ "a bien été enregistré");
+            System.out.println(" nom="+client.getNom()+"; prénom="+client.getPrenom()+"; mail="+client.getAdresseElectronique()+"; motDePasse="+client.getMdp()+ "; numeroTel="+client.getNumerotel()+"; dateNaissance="+client.getDateNaissance()+ "a bien été enregistré");
         }    
     }
     
@@ -61,7 +59,7 @@ public class Main {
     }
    
     
-    public static void testDemandeConsultation() throws ParseException{
+    public static void testDemandeConsultation() throws ParseException, IOException{
         Service serviceConsultation = new Service();
         Date d = DateFormat.parse("19/12/2000");
         Date d1 = DateFormat.parse("10/12/2000");
@@ -69,10 +67,10 @@ public class Main {
         Client client = new Client("alami", "meryem", "meryem.alamiii@gmail.com", "meryemalami", "0651815318", d, "Einstein");
         Client client1 = new Client("tram", "hugo", "hugo.tram@gmail.com", "mdp", "0651233318", d1 , "Einstein");
 
-        Medium medium= new Medium("Mme Irma","F","blabla");
+        Cartomancien carto = new Cartomancien("Mme Irma","F","blabla");
         
-        serviceConsultation.demanderConsultation(client,medium);
-        serviceConsultation.demanderConsultation(client1,medium);
+        serviceConsultation.demanderConsultation(client,carto);
+        serviceConsultation.demanderConsultation(client1,carto);
 
     }
    
