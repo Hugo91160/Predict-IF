@@ -8,6 +8,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import fr.insalyon.dasi.PredictIF.predictif.metier.modele.*;
 import java.io.IOException;
+import java.util.List;
 
 class Main {
 
@@ -15,10 +16,12 @@ class Main {
         
         JpaUtil.init();
         
-        testInscriptionClient();
-        testInitialisationEmploye();
-        testAuthentificationUtilisateur();
-        testDemandeConsultation();
+        //testInscriptionClient();
+        //testInitialisationEmploye();
+        //testAuthentificationUtilisateur();
+        //testDemandeConsultation();
+        testTop5();
+        //testConsultation();
         JpaUtil.destroy();
     }
     
@@ -53,7 +56,7 @@ class Main {
     public static void testInitialisationEmploye(){
         //Inscription employe
         Service serviceEmploye = new Service();
-        serviceEmploye.creationEmploye();  
+        //serviceEmploye.creationEmploye();  
     }
    
     
@@ -70,6 +73,30 @@ class Main {
         serviceConsultation.demanderConsultation(client,carto);
         serviceConsultation.demanderConsultation(client1,carto);
 
+    }
+    
+    public static void testConsultation() throws IOException, ParseException
+    {
+        Service service= new Service();
+        Date d = DateFormat.parse("19/12/2000");
+        Date d1 = DateFormat.parse("10/12/2000");
+        Client client = new Client("alami", "meryem", "meryem.alamiii@gmail.com", "meryemalami", "0651815318", d, "Einstein");
+        service.inscriptionClient(client);
+        Employe employe = new Employe("a","b", "06", "mdp", "mail", true, "F");
+        service.initialisationEmploye(employe);
+        Cartomancien carto = new Cartomancien("Mme Irma","F","blabla");
+        service.initialisationMedium(carto);
+
+        Consultation consultation;
+        consultation = service.demanderConsultation(client, carto);
+        if(consultation != null)
+        {
+            String com = "NUL";
+            service.finirConsultation(consultation, com);
+        }
+        else {
+            System.out.println("C LA MERDE");
+        }
     }
    
     public static void testAuthentificationUtilisateur()
@@ -93,6 +120,49 @@ class Main {
         service.authentifierUtilisateur("a@gmail.com", "YO"); //mdp erroné
         
         
+    }
+    
+    public static void testTop5() throws ParseException, IOException{
+        Medium medium = new Cartomancien("Mme Irma","F","blabla");
+        Medium medium1= new Cartomancien("m1","F","blabla");
+        Medium medium2= new Cartomancien("m2","F","blabla");
+        Medium medium3= new Cartomancien("m3","F","blabla");
+        Medium medium4= new Cartomancien("m4","F","blabla");
+        Medium medium5= new Cartomancien("m5","F","blabla");
+        Medium medium6= new Cartomancien("m6","F","blabla");
+        Medium medium7= new Cartomancien("m7","F","blabla"); 
+
+        Service service = new Service();
+        Date d = DateFormat.parse("19/12/2000");
+        Client client = new Client("alami", "meryem", "meryem.alamiii@gmail.com", "meryemalami", "0651815318", d, "Einstein");
+        Employe employe = new Employe("a","b", "06", "mdp", "mail", true, "F");
+        service.initialisationEmploye(employe);
+        service.inscriptionClient(client);
+        service.initialisationMedium(medium);
+        service.initialisationMedium(medium1);
+        service.initialisationMedium(medium2);
+        service.initialisationMedium(medium3);
+        service.initialisationMedium(medium4);
+        service.initialisationMedium(medium5);
+        service.initialisationMedium(medium6);
+        service.initialisationMedium(medium7);
+        
+        Consultation consultation;
+        consultation = service.demanderConsultation(client, medium);
+        
+        if(consultation != null)
+        {
+            String com = "NUL";
+            service.finirConsultation(consultation, com);
+        }
+        
+        System.out.println(medium.getNombreConsultation());
+        
+       
+        List <Medium> listeTopCinq = service.top5();
+        for(int i=0; i<5; i++ ){
+            System.out.println(listeTopCinq.get(i).getDenomination());
+        }
     }
 
     

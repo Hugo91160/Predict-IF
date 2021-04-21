@@ -5,6 +5,7 @@
  */
 package fr.insalyon.dasi.PredictIF.predictif.metier.modele;
 
+import java.time.LocalTime;
 import java.util.Date;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -35,12 +36,19 @@ public class Consultation {
     private Employe employe;
     @ManyToOne
     private Medium medium;
+    private String commentaire;
 
     public Consultation(Date dateDebut, Client client, Employe employe, Medium medium) {
         this.dateDebut = dateDebut;
         this.client = client;
         this.employe = employe;
         this.medium = medium;
+
+        this.commentaire = null;
+    }
+
+    public void setCommentaire(String commentaire) {
+        this.commentaire = commentaire;
     }
 
     public Consultation() {
@@ -62,6 +70,10 @@ public class Consultation {
 
     public void setDateDebut(Date date) {
         this.dateDebut = date;
+    }
+
+    public void setDateFin(Date dateFin) {
+        this.dateFin = dateFin;
     }
     
     

@@ -30,6 +30,14 @@ public class ConsultationDao {
         return listeEmploye;
     }
     
+    public Consultation creerConsultation(Consultation consultation)
+    {
+        JpaUtil.obtenirContextePersistance().persist(consultation);
+        return consultation;
+    }
+    
+    
+    
     
       
 }

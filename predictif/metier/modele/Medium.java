@@ -20,6 +20,7 @@ public abstract class Medium {
     private String denomination;
     private String genre;
     private String presentation;
+    private int NombreConsultation;
 
     public Medium() {
     }
@@ -28,6 +29,15 @@ public abstract class Medium {
         this.denomination = denomination;
         this.genre = genre;
         this.presentation = presentation;
+        this.NombreConsultation = 0;
+    }
+
+    public int getNombreConsultation() {
+        return NombreConsultation;
+    }
+
+    public void setNombreConsultation(int NombreConsultation) {
+        this.NombreConsultation = NombreConsultation;
     }
 	
     public String getDenomination() {
