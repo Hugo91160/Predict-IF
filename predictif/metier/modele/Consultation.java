@@ -12,18 +12,22 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 /**
  *
  * @author 
  */
 @Entity
-@Table(name = "COnsultation")
+@Table(name = "Consultation")
 public class Consultation {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO) 
     private Long id;
+    @Temporal(TemporalType.DATE)
     private Date dateDebut;
+    @Temporal(TemporalType.DATE)
     private Date dateFin;
     @ManyToOne
     private Client client;

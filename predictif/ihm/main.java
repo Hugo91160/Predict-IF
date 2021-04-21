@@ -19,8 +19,6 @@ class Main {
         testInitialisationEmploye();
         testAuthentificationUtilisateur();
         testDemandeConsultation();
-        
-    
         JpaUtil.destroy();
     }
     
