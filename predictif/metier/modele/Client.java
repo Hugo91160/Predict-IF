@@ -42,11 +42,13 @@ public class Client extends Utilisateur {
         this.profilAstral = null;
         this.historique = null;
     }
-
-    public void setHistorique(List<Consultation> historique) {
-        this.historique = historique;
+    
+    public void addConsultation(Consultation consult)
+    {
+        this.historique.add(consult);   
     }
 
+   
     public List<Consultation> getHistorique() {
         return historique;
     }

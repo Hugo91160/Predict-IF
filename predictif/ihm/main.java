@@ -31,9 +31,9 @@ class Main {
      public static void initialiserUtilisateur() throws ParseException, IOException{
         Client client;
         Date d = DateFormat.parse("19/12/2000");
-        client = new Client("alami", "meryem", "meryem.alami00@gmail.com", "meryemalami", "0651815318", d, "Einstein");
-            Service serviceClient = new Service();
-            serviceClient.inscriptionClient(client);    
+        client = new Client("alami", "meryem", "0651815318", "meryemalami","meryem.alami00@gmail.com", d, "Einstein");
+        Service serviceClient = new Service();
+        serviceClient.inscriptionClient(client);    
             
     }
     
@@ -103,7 +103,7 @@ class Main {
             service.finirConsultation(consultation, com);
         }
         else {
-            System.out.println("C LA MERDE");
+            System.out.println("Erreur, pas de consultation disponible");
         }
     }
    

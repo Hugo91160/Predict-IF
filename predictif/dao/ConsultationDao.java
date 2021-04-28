@@ -13,6 +13,7 @@ import fr.insalyon.dasi.PredictIF.predictif.metier.modele.Client;
 import  fr.insalyon.dasi.PredictIF.predictif.dao.JpaUtil.*;
 import static fr.insalyon.dasi.PredictIF.predictif.dao.JpaUtil.obtenirContextePersistance;
 import java.util.List;
+import javax.persistence.EntityManager;
 import javax.persistence.Query;
 
 
@@ -28,7 +29,7 @@ public class ConsultationDao {
         JpaUtil.obtenirContextePersistance().persist(consultation);
         return consultation;
     }
-    
+    /*
     public List<Consultation> getHistorique(Client client)
     {
         //JpaUtil.obtenirContextePersistance().persist(medium);
@@ -36,6 +37,13 @@ public class ConsultationDao {
         requete.setParameter("client", client);
         List <Consultation> listeConsultation = requete.getResultList();
         return listeConsultation;
+    }
+    */
+    
+    public Consultation actualise(Consultation c)
+    {
+        EntityManager em = JpaUtil.obtenirContextePersistance();
+        return em.merge(c);
     }
     
     
