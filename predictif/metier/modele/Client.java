@@ -21,9 +21,10 @@ public class Client extends Utilisateur {
     @Temporal(TemporalType.DATE)
     private Date dateNaissance;    
     private String adressePostale;
-    
     @Embedded
     private ProfilAstral profilAstral; 
+    @OneToMany
+    private List <Consultation> historique;
     
     public Client() {
     }
@@ -39,6 +40,15 @@ public class Client extends Utilisateur {
         this.dateNaissance = dateNaissance;
         this.adressePostale = adressePostale;
         this.profilAstral = null;
+        this.historique = null;
+    }
+
+    public void setHistorique(List<Consultation> historique) {
+        this.historique = historique;
+    }
+
+    public List<Consultation> getHistorique() {
+        return historique;
     }
 
     public void setProfilAstral(ProfilAstral profilAstral) {

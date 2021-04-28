@@ -8,6 +8,7 @@ package fr.insalyon.dasi.PredictIF.predictif.dao;
 import fr.insalyon.dasi.PredictIF.predictif.metier.modele.Consultation;
 import fr.insalyon.dasi.PredictIF.predictif.metier.modele.Employe;
 import fr.insalyon.dasi.PredictIF.predictif.metier.modele.Medium;
+import fr.insalyon.dasi.PredictIF.predictif.metier.modele.Client;
 
 import  fr.insalyon.dasi.PredictIF.predictif.dao.JpaUtil.*;
 import static fr.insalyon.dasi.PredictIF.predictif.dao.JpaUtil.obtenirContextePersistance;
@@ -21,14 +22,6 @@ import javax.persistence.Query;
  */
 public class ConsultationDao {
 
-    //Filtre les employes ayant le meme genre que le medium
-    public List <Employe> filtrerEmployer(Medium medium) {
-        //JpaUtil.obtenirContextePersistance().persist(medium);
-        Query requete = obtenirContextePersistance().createQuery("Select e from Employe e where e.genre=:genre and e.disponibilite=true order by e.nbConsultation ASC");
-        requete.setParameter("genre", medium.getGenre());
-        List <Employe> listeEmploye = requete.getResultList();
-        return listeEmploye;
-    }
     
     public Consultation creerConsultation(Consultation consultation)
     {
@@ -36,6 +29,14 @@ public class ConsultationDao {
         return consultation;
     }
     
+    public List<Consultation> getHistorique(Client client)
+    {
+        //JpaUtil.obtenirContextePersistance().persist(medium);
+        Query requete = obtenirContextePersistance().createQuery("Select c from Consultation c where c.client=:client");
+        requete.setParameter("client", client);
+        List <Consultation> listeConsultation = requete.getResultList();
+        return listeConsultation;
+    }
     
     
     

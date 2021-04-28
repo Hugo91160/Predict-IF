@@ -5,8 +5,10 @@
  */
 package fr.insalyon.dasi.PredictIF.predictif.metier;
 
+import fr.insalyon.dasi.PredictIF.predictif.dao.ClientDao;
 import fr.insalyon.dasi.PredictIF.predictif.metier.modele.*;
 import fr.insalyon.dasi.PredictIF.predictif.dao.ConsultationDao;
+import fr.insalyon.dasi.PredictIF.predictif.dao.EmployeDao;
 import fr.insalyon.dasi.PredictIF.predictif.dao.JpaUtil;
 import fr.insalyon.dasi.PredictIF.predictif.dao.MediumDao;
 import fr.insalyon.dasi.PredictIF.predictif.dao.UtilisateurDao;
@@ -137,7 +139,7 @@ public class Service {
     
     public Consultation demanderConsultation(Client client, Medium medium)
     {
-        ConsultationDao consultationDao = new ConsultationDao();
+        EmployeDao employeDao = new EmployeDao();
         MediumDao mediumDao = new MediumDao();
         Consultation consultation = new Consultation();
         
@@ -146,7 +148,7 @@ public class Service {
             JpaUtil.ouvrirTransaction();
             
             //Pour récupérer la liste des employées disponibles et avec le bon genre
-            List <Employe> listeEmploye = consultationDao.filtrerEmployer(medium);
+            List <Employe> listeEmploye = employeDao.filtrerEmployer(medium); 
             
             //Si la liste est vide
             if(listeEmploye.isEmpty()){
@@ -157,13 +159,13 @@ public class Service {
                 e.setDisponibilite(false);
                 //Créer la consultation
                 Date dateDebut = new Date();
-              
                 consultation = new Consultation( dateDebut, client, e, medium);
-                medium.setNombreConsultation(medium.getNombreConsultation()+1);
-                mediumDao.actualiseNbConsult(medium);
+                medium.incrementeConsultation();
+                mediumDao.actualise(medium);
                 
                 System.out.println("Vous avez une consultation avec " +medium.getDenomination());
-                e.setNbConsultation(e.getNbConsultation()+1);
+                e.incrementeConsultation();
+                employeDao.actualise(e);
                 System.out.println("Son nb de consultation est " +(e.getNbConsultation()));
                 System.out.println(" L'employé correspondant est " +(e.getNom()));
                 }
@@ -188,6 +190,12 @@ public class Service {
     public Consultation finirConsultation(Consultation consultation, String commentaire)
     {
         ConsultationDao consultationDao = new ConsultationDao();
+        EmployeDao employeDao = new EmployeDao();
+        ClientDao clientDao = new ClientDao();
+        
+        Employe e = consultation.getEmploye();
+        Client c = consultation.getClient();
+        
         consultation.setCommentaire(commentaire);
         Date dateFin = new Date();
         consultation.setDateFin(dateFin);
@@ -197,7 +205,12 @@ public class Service {
         {
             JpaUtil.creerContextePersistance();
             JpaUtil.ouvrirTransaction();
+            
+            e.setDisponibilite(true);
+            employeDao.actualise(e);
             consultationDao.creerConsultation(consultation); //persist dans la bdd la consultation
+            c.setHistorique(consultationDao.getHistorique(c));
+            clientDao.actualise(c);
             JpaUtil.validerTransaction();
         }
         catch (Exception ex)

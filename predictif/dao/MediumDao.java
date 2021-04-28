@@ -30,7 +30,7 @@ public class MediumDao {
         return listeMedium;
     }
     
-    public Medium actualiseNbConsult(Medium medium)
+    public Medium actualise(Medium medium)
     {
         EntityManager em = JpaUtil.obtenirContextePersistance();
         return em.merge(medium);

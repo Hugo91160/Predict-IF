@@ -46,6 +46,10 @@ public class Employe extends Utilisateur implements Serializable {
     public void setNbConsultation(int nbConsultation) {
         this.nbConsultation = nbConsultation;
     }
+
+    public void incrementeConsultation() {
+        this.nbConsultation++;
+    }
     
     
 }

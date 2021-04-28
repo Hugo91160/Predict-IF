@@ -15,13 +15,13 @@ class Main {
     public static void main(String[] args) throws ParseException, IOException {
         
         JpaUtil.init();
-        
-        //testInscriptionClient();
+        testInscriptionClient();
         //testInitialisationEmploye();
         //testAuthentificationUtilisateur();
         //testDemandeConsultation();
-        testTop5();
+        //testTop5();
         //testConsultation();
+        testHistorique();
         JpaUtil.destroy();
     }
     
@@ -37,7 +37,7 @@ class Main {
             
     }
     
-    public static void  testInscriptionClient() throws ParseException, IOException{
+    public static Client testInscriptionClient() throws ParseException, IOException{
         //Inscription Client
         Date d = DateFormat.parse("19/12/2000");
         Client client = new Client("alami", "meryem", "meryem.alami@gmail.com", "meryemalami", "0651815318", d, "Einstein");
@@ -50,7 +50,9 @@ class Main {
         }else {
             System.out.println("Succès inscription\n");
             System.out.println(" nom="+client.getNom()+"; prénom="+client.getPrenom()+"; mail="+client.getAdresseElectronique()+"; motDePasse="+client.getMdp()+ "; numeroTel="+client.getNumerotel()+"; dateNaissance="+client.getDateNaissance()+ "a bien été enregistré");
-        }    
+        }
+        
+        return client;
     }
     
     public static void testInitialisationEmploye(){
@@ -81,7 +83,11 @@ class Main {
         Date d = DateFormat.parse("19/12/2000");
         Date d1 = DateFormat.parse("10/12/2000");
         Client client = new Client("alami", "meryem", "meryem.alamiii@gmail.com", "meryemalami", "0651815318", d, "Einstein");
+        Client client2 = new Client("alami2", "meryem", "meryem.alamiii@gmail.com", "meryemalami", "0651815318", d, "Einstein");
+
         service.inscriptionClient(client);
+        service.inscriptionClient(client2);
+        
         Employe employe = new Employe("a","b", "06", "mdp", "mail", true, "F");
         service.initialisationEmploye(employe);
         Cartomancien carto = new Cartomancien("Mme Irma","F","blabla");
@@ -89,6 +95,8 @@ class Main {
 
         Consultation consultation;
         consultation = service.demanderConsultation(client, carto);
+        Consultation consultation2;
+        consultation2 = service.demanderConsultation(client2, carto);
         if(consultation != null)
         {
             String com = "NUL";
@@ -164,6 +172,74 @@ class Main {
             System.out.println(listeTopCinq.get(i).getDenomination());
         }
     }
+    
+    public static void testHistorique() throws ParseException, IOException{
+        testInscriptionClient();
+        Service service= new Service();
+        
+        Client client;
+        client = (Client) service.authentifierUtilisateur("0651815318", "meryemalami");//client
+        
+    
+        Employe employe = new Employe("a","b", "06", "mdp", "mail", true, "H");
+        service.initialisationEmploye(employe);
+        Cartomancien carto = new Cartomancien("M gael","H","blabla");
+        service.initialisationMedium(carto);
+        
+        Employe employe1 = new Employe("c","d", "0687", "mdp", "mail2", true, "F");
+        service.initialisationEmploye(employe1);
+        Cartomancien carto1 = new Cartomancien("Mme Irma","F","blabla");
+        service.initialisationMedium(carto1);
+        
+        Employe employe2 = new Employe("e","f", "06", "mdp", "mail3", true, "H");
+        service.initialisationEmploye(employe2);
+        Cartomancien carto2 = new Cartomancien("Patrick","H","blabla");
+        service.initialisationMedium(carto2);
+        
+        Employe employe3 = new Employe("g","h", "06", "mdp", "mail4", true, "F");
+        service.initialisationEmploye(employe3);
+        Cartomancien carto3 = new Cartomancien("Mme karma","F","blabla");
+        service.initialisationMedium(carto3);
+        
+        Consultation consultation;
+        consultation = service.demanderConsultation(client, carto);
+        if(consultation != null)
+        {
+            String com = "NUL";
+            service.finirConsultation(consultation, com);
+        }
+        
+        Consultation consultation1;
+        consultation1 = service.demanderConsultation(client, carto1);
+        if(consultation1 != null)
+        {
+            String com = "NUL";
+            service.finirConsultation(consultation1, com);
+        }
+        
+         Consultation consultation2;
+        consultation2 = service.demanderConsultation(client, carto2);
+        if(consultation2 != null)
+        {
+            String com = "NUL";
+            service.finirConsultation(consultation2, com);
+        }
+        
+        Consultation consultation3;
+        consultation3 = service.demanderConsultation(client, carto3);
+        if(consultation3 != null)
+        {
+            String com = "NUL";
+            service.finirConsultation(consultation3, com);
+        }
+        
+        
+        
+        for(int i=0; i<4; i++ ){
+            System.out.println(client.getHistorique().get(i).getMedium().getDenomination());
+        }
+    } 
+
 
     
     

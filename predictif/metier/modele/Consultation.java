@@ -26,9 +26,9 @@ public class Consultation {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO) 
     private Long id;
-    @Temporal(TemporalType.DATE)
+    @Temporal(TemporalType.TIMESTAMP)
     private Date dateDebut;
-    @Temporal(TemporalType.DATE)
+    @Temporal(TemporalType.TIMESTAMP)
     private Date dateFin;
     @ManyToOne
     private Client client;
@@ -37,7 +37,19 @@ public class Consultation {
     @ManyToOne
     private Medium medium;
     private String commentaire;
+    
+    public Client getClient() {
+        return client;
+    }
 
+    public void setClient(Client client) {
+        this.client = client;
+    }
+
+    public Employe getEmploye() {
+        return employe;
+    }
+    
     public Consultation(Date dateDebut, Client client, Employe employe, Medium medium) {
         this.dateDebut = dateDebut;
         this.client = client;
@@ -74,6 +86,10 @@ public class Consultation {
 
     public void setDateFin(Date dateFin) {
         this.dateFin = dateFin;
+    }
+
+    public Medium getMedium() {
+        return medium;
     }
     
     

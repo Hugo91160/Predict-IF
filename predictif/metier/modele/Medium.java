@@ -31,7 +31,12 @@ public abstract class Medium {
         this.presentation = presentation;
         this.NombreConsultation = 0;
     }
-
+    
+    public void incrementeConsultation()
+    {
+        this.NombreConsultation++;
+    }
+    
     public int getNombreConsultation() {
         return NombreConsultation;
     }
