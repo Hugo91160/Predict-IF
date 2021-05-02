@@ -181,8 +181,8 @@ class Main {
         Service service= new Service();
         
         Client client;
-        client = (Client) service.authentifierUtilisateur("0590232772", "ASmdp");//client
-        
+        client = (Client) service.authentifierUtilisateur("asing8183@free.com", "ASmdp");//client
+       
         Employe employe = new Employe("Unlu","Adrien", "0367699654", "UAmdp", "adrien.umlu@laposte.net", true, "M");
         service.initialisationEmploye(employe);
         Medium medium = new Cartomancien("Mme Irma","F","Comprenez votre entourage grâce à mes cartes! Résultats rapides.");
@@ -219,7 +219,7 @@ class Main {
             service.finirConsultation(consultation1, com);
         }
         
-         Consultation consultation2;
+        Consultation consultation2;
         consultation2 = service.demanderConsultation(client, medium3);
         if(consultation2 != null)
         {
@@ -238,7 +238,7 @@ class Main {
         
         
         for(int i=0; i<3; i++ ){
-            System.out.println(client.getHistorique().get(i));//getMedium().getDenomination());
+            System.out.println(client.getHistorique().get(i).getMedium().getDenomination());
         }
     } 
 
