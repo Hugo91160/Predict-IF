@@ -23,7 +23,7 @@ public class Client extends Utilisateur {
     private String adressePostale;
     @Embedded
     private ProfilAstral profilAstral; 
-    @OneToMany
+    @OneToMany(mappedBy="client")
     private List <Consultation> historique;
     
     public Client() {
@@ -39,8 +39,8 @@ public class Client extends Utilisateur {
         super(nom, prenom, numerotel, mdp, adresseElectronique);
         this.dateNaissance = dateNaissance;
         this.adressePostale = adressePostale;
-        this.profilAstral = null;
-        this.historique = null;
+        //this.profilAstral = null;
+        //this.historique = null;
     }
     
     public void addConsultation(Consultation consult)

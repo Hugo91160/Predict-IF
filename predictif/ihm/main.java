@@ -15,7 +15,7 @@ class Main {
     public static void main(String[] args) throws ParseException, IOException {
         
         JpaUtil.init();
-        testInscriptionClient();
+        //testInscriptionClient();
         //testInitialisationEmploye();
         //testAuthentificationUtilisateur();
         //testDemandeConsultation();
@@ -30,8 +30,8 @@ class Main {
     
      public static void initialiserUtilisateur() throws ParseException, IOException{
         Client client;
-        Date d = DateFormat.parse("19/12/2000");
-        client = new Client("alami", "meryem", "0651815318", "meryemalami","meryem.alami00@gmail.com", d, "Einstein");
+        Date d = DateFormat.parse("09/11/1982");
+        client = new Client("Sing", "Ainhoa", "0590232772", "ASmdp","asing8183@free.com", d, "Einstein");
         Service serviceClient = new Service();
         serviceClient.inscriptionClient(client);    
             
@@ -39,8 +39,9 @@ class Main {
     
     public static Client testInscriptionClient() throws ParseException, IOException{
         //Inscription Client
-        Date d = DateFormat.parse("19/12/2000");
-        Client client = new Client("alami", "meryem", "meryem.alami@gmail.com", "meryemalami", "0651815318", d, "Einstein");
+        Client client;
+        Date d = DateFormat.parse("09/11/1982");
+        client = new Client("Sing", "Ainhoa", "0590232772", "ASmdp","asing8183@free.com", d, "Einstein");
         Service serviceClient = new Service();
         client = serviceClient.inscriptionClient(client);
 
@@ -54,43 +55,41 @@ class Main {
         
         return client;
     }
-    
-    public static void testInitialisationEmploye(){
-        //Inscription employe
-        Service serviceEmploye = new Service();
-        //serviceEmploye.creationEmploye();  
-    }
-   
-    
+        
     public static void testDemandeConsultation() throws ParseException, IOException{
         Service serviceConsultation = new Service();
-        Date d = DateFormat.parse("19/12/2000");
-        Date d1 = DateFormat.parse("10/12/2000");
+        Client client;
+        Date d = DateFormat.parse("09/11/1982");
+        client = new Client("Sing", "Ainhoa", "0590232772", "ASmdp","asing8183@free.fr", d, "Einstein");
+        Client client2;
+        d = DateFormat.parse("17/11/1994");
+        client2 = new Client("Mie", "Romain", "0307363387", "MRmdp","romain.mie@free.fr", d, "Einstein");
 
-        Client client = new Client("alami", "meryem", "meryem.alamiii@gmail.com", "meryemalami", "0651815318", d, "Einstein");
-        Client client1 = new Client("tram", "hugo", "hugo.tram@gmail.com", "mdp", "0651233318", d1 , "Einstein");
-
-        Cartomancien carto = new Cartomancien("Mme Irma","F","blabla");
+        Cartomancien carto = new Cartomancien("Mme Irma","F","Comprenez votre entourage grâce à mes cartes! Résultats rapides.");
         
         serviceConsultation.demanderConsultation(client,carto);
-        serviceConsultation.demanderConsultation(client1,carto);
+        
+        serviceConsultation.demanderConsultation(client2,carto);
 
     }
     
     public static void testConsultation() throws IOException, ParseException
     {
         Service service= new Service();
-        Date d = DateFormat.parse("19/12/2000");
-        Date d1 = DateFormat.parse("10/12/2000");
-        Client client = new Client("alami", "meryem", "meryem.alamiii@gmail.com", "meryemalami", "0651815318", d, "Einstein");
-        Client client2 = new Client("alami2", "meryem", "meryem.alamiii@gmail.com", "meryemalami", "0651815318", d, "Einstein");
-
+        Client client;
+        Date d = DateFormat.parse("09/11/1982");
+        client = new Client("Sing", "Ainhoa", "0590232772", "ASmdp","asing8183@free.fr", d, "Einstein");
+        Client client2;
+        d = DateFormat.parse("17/11/1994");
+        client2 = new Client("Mie", "Romain", "0307363387", "MRmdp","romain.mie@free.fr", d, "Einstein");
+        
         service.inscriptionClient(client);
         service.inscriptionClient(client2);
         
-        Employe employe = new Employe("a","b", "06", "mdp", "mail", true, "F");
+        Employe employe = new Employe("Unlu","Adrien", "0367699654", "UAmdp", "adrien.umlu@laposte.net", true, "M");
         service.initialisationEmploye(employe);
-        Cartomancien carto = new Cartomancien("Mme Irma","F","blabla");
+        
+        Cartomancien carto = new Cartomancien("Mme Irma","F","Comprenez votre entourage grâce à mes cartes! Résultats rapides.");
         service.initialisationMedium(carto);
 
         Consultation consultation;
@@ -111,56 +110,60 @@ class Main {
     {
         //Cas bon :
         Service service = new Service();
-        Utilisateur user = service.authentifierUtilisateur("a@gmail.com", "mdp");//client
+        Utilisateur user = new Employe("Unlu","Adrien", "0367699654", "UAmdp", "adrien.umlu@laposte.net", true, "M");
         if(user instanceof Client)
         {
             Client client = (Client) user;
             System.out.println("*********"+user.getPrenom());
         }
         
-        service.authentifierUtilisateur("a2@gmail.com", "mdp2"); //employe
+        //Cas de succès
+        service.authentifierUtilisateur("adrien.umlu@laposte.net", "UAmdp"); //employe
         
-        //Cas erreurs : 
+        //Cas erreur : 
         if(service.authentifierUtilisateur("HUGO", "yo") == null ) //fausse addresse elec
         {
             System.out.println("Erreur d'authentification, veuillez réessayer.");
         }
-        service.authentifierUtilisateur("a@gmail.com", "YO"); //mdp erroné
+       
         
         
     }
     
     public static void testTop5() throws ParseException, IOException{
-        Medium medium = new Cartomancien("Mme Irma","F","blabla");
-        Medium medium1= new Cartomancien("m1","F","blabla");
-        Medium medium2= new Cartomancien("m2","F","blabla");
-        Medium medium3= new Cartomancien("m3","F","blabla");
-        Medium medium4= new Cartomancien("m4","F","blabla");
-        Medium medium5= new Cartomancien("m5","F","blabla");
-        Medium medium6= new Cartomancien("m6","F","blabla");
-        Medium medium7= new Cartomancien("m7","F","blabla"); 
-
+        //Déclarations : 
+        Medium medium = new Cartomancien("Mme Irma","F","Comprenez votre entourage grâce à mes cartes! Résultats rapides.");
+        Medium medium2 = new Spirite("Professeur Tran", "H", "Votre avenir est devant vous : regardons-le ensemble !", "Marc de café, boule de cristal, oreilles de lapin");
+        Medium medium3 = new Spirite("Gwanaelle", "F", "Spécialiste des grandes conversions au-delà de toutes les frontières", "Boule de cristal");
+        Medium medium4 = new Cartomancien("Endora", "F", "Mes cartes répondront à toutes vos questions personnelles");
+        Medium medium5 = new Astrologue("Séréna", "F", "Basée à Champigny-Sur-Marne, Séréna vous révèlera votre avenir pour éclaire votre passé", "Ecole Normale Supérieur d'Astrologie", "2006");
+        Medium medium6 = new Astrologue("Mr M", "H", "Avenir, avenir, que nous réserves-tu? N'attendez plus, demandez à me consulter!", " Institut des Nouveaux Savoirs Astrologiques", "2010");
+       
         Service service = new Service();
+        Consultation consultation;
+        
+       
         Date d = DateFormat.parse("19/12/2000");
-        Client client = new Client("alami", "meryem", "meryem.alamiii@gmail.com", "meryemalami", "0651815318", d, "Einstein");
-        Employe employe = new Employe("a","b", "06", "mdp", "mail", true, "F");
+        Client client = new Client("Sing", "Ainhoa", "0590232772", "ASmdp","asing8183@free.fr", d, "Einstein");
+        Employe employe = new Employe("Unlu","Adrien", "0367699654", "UAmdp", "adrien.umlu@laposte.net", true, "M");
+        
+        //Ajout dans la bdd : 
         service.initialisationEmploye(employe);
         service.inscriptionClient(client);
         service.initialisationMedium(medium);
-        service.initialisationMedium(medium1);
         service.initialisationMedium(medium2);
         service.initialisationMedium(medium3);
         service.initialisationMedium(medium4);
         service.initialisationMedium(medium5);
         service.initialisationMedium(medium6);
-        service.initialisationMedium(medium7);
+        service.initialisationMedium(medium6);
         
-        Consultation consultation;
+        
         consultation = service.demanderConsultation(client, medium);
         
         if(consultation != null)
         {
-            String com = "NUL";
+            String com = "test"; 
             service.finirConsultation(consultation, com);
         }
         
@@ -178,31 +181,30 @@ class Main {
         Service service= new Service();
         
         Client client;
-        client = (Client) service.authentifierUtilisateur("0651815318", "meryemalami");//client
+        client = (Client) service.authentifierUtilisateur("0590232772", "ASmdp");//client
         
-    
-        Employe employe = new Employe("a","b", "06", "mdp", "mail", true, "H");
+        Employe employe = new Employe("Unlu","Adrien", "0367699654", "UAmdp", "adrien.umlu@laposte.net", true, "M");
         service.initialisationEmploye(employe);
-        Cartomancien carto = new Cartomancien("M gael","H","blabla");
-        service.initialisationMedium(carto);
+        Medium medium = new Cartomancien("Mme Irma","F","Comprenez votre entourage grâce à mes cartes! Résultats rapides.");
+        service.initialisationMedium(medium);
         
-        Employe employe1 = new Employe("c","d", "0687", "mdp", "mail2", true, "F");
+        Employe employe1 = new Employe("HONRY", "Matteo", "0482381862", "HMmdp", "matteo.honry@yahoo.com", true, "M");
         service.initialisationEmploye(employe1);
-        Cartomancien carto1 = new Cartomancien("Mme Irma","F","blabla");
-        service.initialisationMedium(carto1);
-        
-        Employe employe2 = new Employe("e","f", "06", "mdp", "mail3", true, "H");
+        Medium medium2 = new Spirite("Professeur Tran", "H", "Votre avenir est devant vous : regardons-le ensemble !", "Marc de café, boule de cristal, oreilles de lapin");
+
+        service.initialisationMedium(medium2);
+        Employe employe2 = new Employe("CECCANI", "Kevin", "0664426037", "CKmdp", "kevin.ceccani@hotmail.com", true, "M");
         service.initialisationEmploye(employe2);
-        Cartomancien carto2 = new Cartomancien("Patrick","H","blabla");
-        service.initialisationMedium(carto2);
+        Medium medium3 = new Spirite("Gwanaelle", "F", "Spécialiste des grandes conversions au-delà de toutes les frontières", "Boule de cristal");
+        service.initialisationMedium(medium3);
         
-        Employe employe3 = new Employe("g","h", "06", "mdp", "mail4", true, "F");
+        Employe employe3 = new Employe("VOYRET", "Alice", "0486856520", "VAmdp", "alice.voyret@hotmail.com", true, "F");
         service.initialisationEmploye(employe3);
-        Cartomancien carto3 = new Cartomancien("Mme karma","F","blabla");
-        service.initialisationMedium(carto3);
+        Medium medium5 = new Astrologue("Séréna", "F", "Basée à Champigny-Sur-Marne, Séréna vous révèlera votre avenir pour éclaire votre passé", "Ecole Normale Supérieur d'Astrologie", "2006");
+        service.initialisationMedium(medium5);
         
         Consultation consultation;
-        consultation = service.demanderConsultation(client, carto);
+        consultation = service.demanderConsultation(client, medium);
         if(consultation != null)
         {
             String com = "NUL";
@@ -210,7 +212,7 @@ class Main {
         }
         
         Consultation consultation1;
-        consultation1 = service.demanderConsultation(client, carto1);
+        consultation1 = service.demanderConsultation(client, medium2);
         if(consultation1 != null)
         {
             String com = "NUL";
@@ -218,7 +220,7 @@ class Main {
         }
         
          Consultation consultation2;
-        consultation2 = service.demanderConsultation(client, carto2);
+        consultation2 = service.demanderConsultation(client, medium3);
         if(consultation2 != null)
         {
             String com = "NUL";
@@ -226,7 +228,7 @@ class Main {
         }
         
         Consultation consultation3;
-        consultation3 = service.demanderConsultation(client, carto3);
+        consultation3 = service.demanderConsultation(client, medium5);
         if(consultation3 != null)
         {
             String com = "NUL";
@@ -235,8 +237,8 @@ class Main {
         
         
         
-        for(int i=0; i<4; i++ ){
-            System.out.println(client.getHistorique().get(i).getMedium().getDenomination());
+        for(int i=0; i<3; i++ ){
+            System.out.println(client.getHistorique().get(i));//getMedium().getDenomination());
         }
     } 
 
