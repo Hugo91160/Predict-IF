@@ -18,7 +18,7 @@ import javax.persistence.TemporalType;
 
 /**
  *
- * @author 
+ * @author
  */
 @Entity
 @Table(name = "Consultation")

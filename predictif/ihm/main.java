@@ -2,6 +2,7 @@ package fr.insalyon.dasi.PredictIF.predictif.ihm;
 
 
 import fr.insalyon.dasi.PredictIF.predictif.dao.JpaUtil;
+import fr.insalyon.dasi.PredictIF.predictif.dao.MediumDao;
 import fr.insalyon.dasi.PredictIF.predictif.metier.Service;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -20,8 +21,8 @@ class Main {
         //testAuthentificationUtilisateur();
         //testDemandeConsultation();
         //testTop5();
-        //testConsultation();
-        testHistorique();
+        testConsultation();
+        //testHistorique();
         JpaUtil.destroy();
     }
     
@@ -57,7 +58,8 @@ class Main {
     }
         
     public static void testDemandeConsultation() throws ParseException, IOException{
-        Service serviceConsultation = new Service();
+        Service service = new Service();
+        
         Client client;
         Date d = DateFormat.parse("09/11/1982");
         client = new Client("Sing", "Ainhoa", "0590232772", "ASmdp","asing8183@free.fr", d, "Einstein");
@@ -65,11 +67,15 @@ class Main {
         d = DateFormat.parse("17/11/1994");
         client2 = new Client("Mie", "Romain", "0307363387", "MRmdp","romain.mie@free.fr", d, "Einstein");
 
-        Cartomancien carto = new Cartomancien("Mme Irma","F","Comprenez votre entourage grâce à mes cartes! Résultats rapides.");
+        Medium carto = new Cartomancien("Mme Irma","F","Comprenez votre entourage grâce à mes cartes! Résultats rapides.");
+        service.initialisationMedium(carto);
         
-        serviceConsultation.demanderConsultation(client,carto);
+        carto = service.getMedium("Mme Irma");
         
-        serviceConsultation.demanderConsultation(client2,carto);
+        System.out.println("***********"+ carto.getPresentation()+"***********");
+        service.demanderConsultation(client,carto);
+        
+        service.demanderConsultation(client2,carto);
 
     }
     
@@ -86,11 +92,13 @@ class Main {
         service.inscriptionClient(client);
         service.inscriptionClient(client2);
         
-        Employe employe = new Employe("Unlu","Adrien", "0367699654", "UAmdp", "adrien.umlu@laposte.net", true, "M");
+        Employe employe = new Employe("Unlu","Adrien", "0367699654", "UAmdp", "adrien.umlu@laposte.net", true, "F");
         service.initialisationEmploye(employe);
         
-        Cartomancien carto = new Cartomancien("Mme Irma","F","Comprenez votre entourage grâce à mes cartes! Résultats rapides.");
+        
+        Medium carto = new Cartomancien("Mme Irma","F","Comprenez votre entourage grâce à mes cartes! Résultats rapides.");
         service.initialisationMedium(carto);
+        //carto = service.getMedium("Mme Irma");
 
         Consultation consultation;
         consultation = service.demanderConsultation(client, carto);
@@ -110,12 +118,8 @@ class Main {
     {
         //Cas bon :
         Service service = new Service();
-        Utilisateur user = new Employe("Unlu","Adrien", "0367699654", "UAmdp", "adrien.umlu@laposte.net", true, "M");
-        if(user instanceof Client)
-        {
-            Client client = (Client) user;
-            System.out.println("*********"+user.getPrenom());
-        }
+        Employe user = new Employe("Unlu","Adrien", "0367699654", "UAmdp", "adrien.umlu@laposte.net", true, "M");
+        service.initialisationEmploye(user);
         
         //Cas de succès
         service.authentifierUtilisateur("adrien.umlu@laposte.net", "UAmdp"); //employe

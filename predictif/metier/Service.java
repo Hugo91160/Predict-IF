@@ -159,6 +159,7 @@ public class Service {
                 String heureDb = DateFormat.format(dateDebut);
                 DateFormat = new SimpleDateFormat("mm");
                 String minDb = DateFormat.format(dateDebut);
+                
                 //Notif pour client : 
                 StringWriter corps = new StringWriter();
                 PrintWriter smsWriter = new PrintWriter(corps);
@@ -203,7 +204,7 @@ public class Service {
         try {
             JpaUtil.creerContextePersistance();
             JpaUtil.ouvrirTransaction();
-            consultation = consultationDao.actualise(consultation);
+            consultation = consultationDao.actualise(consultation); //actualise la consultation avec le commentaire
             e.setDisponibilite(true);
             employeDao.actualise(e);
             JpaUtil.validerTransaction();
@@ -261,6 +262,23 @@ public class Service {
             JpaUtil.fermerContextePersistance();
         }
         return ListeMedium;
+    }
+    
+    public Medium getMedium(String Denomination)
+    {
+        MediumDao mediumDao = new MediumDao();
+        Medium medium = null;
+        try
+        {
+            JpaUtil.creerContextePersistance();
+            medium = mediumDao.chercherParDenomination(Denomination);
+        } catch(Exception ex){
+            
+        } finally {
+            JpaUtil.fermerContextePersistance();
+        }
+        
+        return medium;
     }
 
 }

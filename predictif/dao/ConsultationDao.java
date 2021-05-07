@@ -29,17 +29,8 @@ public class ConsultationDao {
         JpaUtil.obtenirContextePersistance().persist(consultation);
         return consultation;
     }
-    /*
-    public List<Consultation> getHistorique(Client client)
-    {
-        //JpaUtil.obtenirContextePersistance().persist(medium);
-        Query requete = obtenirContextePersistance().createQuery("Select c from Consultation c where c.client=:client");
-        requete.setParameter("client", client);
-        List <Consultation> listeConsultation = requete.getResultList();
-        return listeConsultation;
-    }
-    */
     
+   
     public Consultation actualise(Consultation c)
     {
         EntityManager em = JpaUtil.obtenirContextePersistance();
