@@ -98,7 +98,7 @@ class Main {
         
         Medium carto = new Cartomancien("Mme Irma","F","Comprenez votre entourage grâce à mes cartes! Résultats rapides.");
         service.initialisationMedium(carto);
-        //carto = service.getMedium("Mme Irma");
+        carto = service.getMedium("Mme Irma"); //Test pour récupérer un medium depuis la bdd
 
         Consultation consultation;
         consultation = service.demanderConsultation(client, carto);
