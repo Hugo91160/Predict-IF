@@ -49,4 +49,12 @@ public class MediumDao {
         }
         return result;
     }
+    
+    public List <Medium> getListeMedium() {
+
+        Query requete = obtenirContextePersistance().createQuery("Select m from Medium m order by m.NombreConsultation DESC");
+
+        List <Medium> listeMedium = requete.getResultList();
+        return listeMedium;
+    }
 }

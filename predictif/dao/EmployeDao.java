@@ -37,5 +37,13 @@ public class EmployeDao {
         EntityManager em = JpaUtil.obtenirContextePersistance();
         return em.merge(e);
     }
+    
+    public List<Employe> getListeEmploye() {
+
+        Query requete = obtenirContextePersistance().createQuery("Select e from Employe e order by e.nbConsultation DESC");
+
+        List<Employe> listeEmploye = requete.getResultList();
+        return listeEmploye;
+    }
    
 }

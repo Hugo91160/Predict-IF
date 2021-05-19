@@ -280,5 +280,42 @@ public class Service {
         
         return medium;
     }
+    
+    
+    public List<Medium> ListerMedium() 
+    {
+        MediumDao mediumDao = new MediumDao();
+        List<Medium> ListeMedium = null;
+
+        try {
+
+            JpaUtil.creerContextePersistance();
+            ListeMedium = mediumDao.getListeMedium();
+
+        } catch (Exception ex) {
+            //ex.printStackTrace();
+        } finally {
+            JpaUtil.fermerContextePersistance();
+        }
+        return ListeMedium;
+    }
+    
+    public List<Employe> ListerEmploye()
+    {
+        EmployeDao employeDao = new EmployeDao();
+        List<Employe> ListeEmploye = null;
+
+        try {
+
+            JpaUtil.creerContextePersistance();
+            ListeEmploye = employeDao.getListeEmploye();
+
+        } catch (Exception ex) {
+            //ex.printStackTrace();
+        } finally {
+            JpaUtil.fermerContextePersistance();
+        }
+        return ListeEmploye;
+    }
 
 }

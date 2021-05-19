@@ -17,17 +17,24 @@ class Main {
         
         JpaUtil.init();
         //testInscriptionClient();
-        //testInitialisationEmploye();
+        testInitialisationEmploye();
         //testAuthentificationUtilisateur();
         //testDemandeConsultation();
         //testTop5();
-        testConsultation();
+        //testConsultation();
         //testHistorique();
         JpaUtil.destroy();
     }
     
     public static SimpleDateFormat DateFormat = new SimpleDateFormat("dd/MM/yyyy");
     Date d;
+    
+    public static void testInitialisationEmploye()
+    {
+        Service service = new Service();
+        Employe employe = new Employe("Unlu","Adrien", "0367699654", "UAmdp", "adrien.umlu@laposte.net", true, "F");
+        service.initialisationEmploye(employe);
+    }
     
      public static void initialiserUtilisateur() throws ParseException, IOException{
         Client client;
