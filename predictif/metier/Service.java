@@ -317,5 +317,23 @@ public class Service {
         }
         return ListeEmploye;
     }
+    
+    public Consultation findConsultation (Employe e){
+        EmployeDao employeDao = new EmployeDao();
+        Consultation resultat = null;
+        
+        try {
+
+            JpaUtil.creerContextePersistance();
+            
+            resultat = (Consultation) employeDao.getConsultation(e);
+            
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        } finally {
+            JpaUtil.fermerContextePersistance();
+        }
+        return resultat;
+    }
 
 }

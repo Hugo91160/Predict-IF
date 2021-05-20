@@ -6,6 +6,7 @@
 package fr.insalyon.dasi.PredictIF.predictif.dao;
 
 import static fr.insalyon.dasi.PredictIF.predictif.dao.JpaUtil.obtenirContextePersistance;
+import fr.insalyon.dasi.PredictIF.predictif.metier.modele.Consultation;
 import fr.insalyon.dasi.PredictIF.predictif.metier.modele.Employe;
 import fr.insalyon.dasi.PredictIF.predictif.metier.modele.Medium;
 import java.util.List;
@@ -44,6 +45,21 @@ public class EmployeDao {
 
         List<Employe> listeEmploye = requete.getResultList();
         return listeEmploye;
+    }
+    
+  
+    public Consultation getConsultation(Employe e) {
+        
+        Query requete = obtenirContextePersistance().createQuery("Select c from Consultation c where c.employe=:emp and c.dateFin is null");
+        requete.setParameter("emp", e);
+        List<Consultation> resultat = requete.getResultList();
+        if (resultat.isEmpty())
+        {
+            System.out.println("Résultat de la requête nulle");
+            return null;
+        }
+        
+        return resultat.get(0);
     }
    
 }

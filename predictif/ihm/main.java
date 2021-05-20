@@ -17,18 +17,40 @@ class Main {
         
         JpaUtil.init();
         //testInscriptionClient();
-        testInitialisationEmploye();
+        //testInitialisationEmploye();
         //testAuthentificationUtilisateur();
         //testDemandeConsultation();
         //testTop5();
         //testConsultation();
         //testHistorique();
+        //testListeMediums();
+        testFindConsultation();
         JpaUtil.destroy();
     }
     
     public static SimpleDateFormat DateFormat = new SimpleDateFormat("dd/MM/yyyy");
     Date d;
+    public static void testListeMediums()
+    {
+        Service service = new Service();
+        List <Medium> list = service.ListerMedium();
+        for(Medium m : list)
+        {
+            System.out.println(m.getDenomination());
+            
+        }
+    }
     
+    public static void testListeEmploye()
+    {
+        Service service = new Service();
+        List <Employe> list = service.ListerEmploye();
+        for(Utilisateur u : list)
+        {
+            System.out.println(u.getNom());
+            
+        }
+    }
     public static void testInitialisationEmploye()
     {
         Service service = new Service();
@@ -251,7 +273,40 @@ class Main {
         for(int i=0; i<3; i++ ){
             System.out.println(client.getHistorique().get(i).getMedium().getDenomination());
         }
-    } 
+    }
+    
+    public static void testFindConsultation() throws ParseException, IOException {
+        
+        
+        Service service = new Service();
+        
+        Date d = DateFormat.parse("19/12/2000");
+        Client client = new Client("Sing", "Ainhoa", "0590232772", "ASmdp","aaasing8183@free.fr", d, "Einstein");
+        service.inscriptionClient(client);
+        //Employe emp = (Employe) service.authentifierUtilisateur("julien.astier@yahoo.com", "AJmdp");
+        //Employe emp = (Employe) service.authentifierUtilisateur("adrien.umlu@laposte.net", "UAmdp");
+        
+        //Employe e = new Employe("Astier","Julien", "0367699654", "AJmdp", "julien.astier@yahoo.com", true, "F");
+        //Employe emp = new Employe("Unlu", "Adrien", "0367699654", "UAmdp", "adrien.umlu@laposte.net", true, "F");
+        //service.inscriptionClient(client);
+        Employe emp = (Employe) service.authentifierUtilisateur("adrien.umlu@laposte.net", "UAmdp");
+        //service.initialisationMedium(medium);
+        Medium carto = service.getMedium("Mme Irma"); //Test pour récupérer un medium depuis la bdd
+        service.demanderConsultation(client, carto);
+        
+        
+        Consultation consultation =  service.findConsultation(emp);
+        
+        if(consultation!=null) {
+
+            System.out.println("La consultation existe");
+            System.out.println(consultation.getDateDebut());
+            
+        } else {
+            System.out.println("La consultation n'existe pas");        
+        }
+
+    }
 
 
     
