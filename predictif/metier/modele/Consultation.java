@@ -62,6 +62,14 @@ public class Consultation {
     public void setCommentaire(String commentaire) {
         this.commentaire = commentaire;
     }
+    
+        public Date getDateFin() {
+        return dateFin;
+    }
+
+    public String getCommentaire() {
+        return commentaire;
+    }
 
     public Consultation() {
     }
