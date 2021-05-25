@@ -21,6 +21,8 @@ public abstract class Utilisateur {
     protected String prenom;
     protected String numerotel;
     protected String mdp;
+    
+    @Column(unique=true)
     protected String adresseElectronique;
 
     public Utilisateur() {
